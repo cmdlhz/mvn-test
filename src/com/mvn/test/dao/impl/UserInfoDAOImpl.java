@@ -18,12 +18,13 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	@Override
 	public List<Map<String, String>> selectUserList(Map<String, String> pUser) {
 		
-		SqlSession ss = InitServlet.getSqlSession();
+		SqlSession ss = InitServlet.getSqlSession(); // InitServlet (in "controller" folder) // 연결한 준비만 하는 것
 		try {
-			return ss.selectList("UserInfo.selectUserList");
+			return ss.selectList("UserInfo.selectUserList"); // 실제로 연결되는 곳
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
+			// 잊지 말고 끊어주기!
 			ss.close();
 		}
 		return null;

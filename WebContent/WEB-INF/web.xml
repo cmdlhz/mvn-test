@@ -14,7 +14,7 @@
   	<filter-class>com.mvn.test.filter.EncodingFilter</filter-class>
   	<init-param>
   		<param-name>charSet</param-name>
-  		<param-value>utf-8</param-value>
+  		<param-value>UTF-8</param-value>
   	</init-param>
   </filter>
   <filter-mapping>
@@ -22,3 +22,7 @@
   	<url-pattern>*</url-pattern>
   </filter-mapping>
 </web-app>
+
+
+<!-- Tomcat 킬 때 딱 한 번만 읽힘! -->
+<!-- 메모리 생성해서 기억해 놓음 -->
