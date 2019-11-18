@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserInfo">
- 	<select id="selectUserList" resultType = "map">
- 		select * from user_info
+ 	<select id="selectUserList" resultType = "com.mvn.test.vo.UserInfoVO">
+ 		select ui_num "uiNum", ui_name "uiName", ui_id "uiId", credat, cretim, moddat, modtim, active from user_info
  	</select>
 </mapper>

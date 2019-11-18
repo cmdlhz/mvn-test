@@ -1,6 +1,7 @@
 package com.mvn.test.filter;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,14 +17,25 @@ import javax.servlet.http.HttpServletResponse;
 //@WebFilter("/EncodingFilter")
 public class EncodingFilter implements Filter {
 	private String charSet = "UTF-8";
+//	List<String> excludePatterns = new ArrayList<>();
 	
 	// 누군가 바로 호출하는 것
     public EncodingFilter() {
 //    	System.out.println("나 무조건 실행 (EncodingFiter())");
+//    	excludePatterns.add(".js");
+//    	excludePatterns.add(".css");
     }
 
 	public void destroy() {
 	}
+	
+//	public boolean isExclude(String path) {
+//		for(String pat: excludePatterns) {
+//			if(path.indexOf(pat) != -1) {
+//				
+//			}
+//		}
+//	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// 요청할 때
@@ -32,10 +44,12 @@ public class EncodingFilter implements Filter {
 		System.out.println("1.doFilter() @ EncodingFilter");
 //		System.out.println(req.getCharacterEncoding());
 		
+		
+		
 		// 결과값은 따로 찍어줘야 함
 		HttpServletResponse res = (HttpServletResponse)response;
 		// 항상 "json"이 좋은 것은 아님. html이 필요할 수도
-		res.setContentType("application/json;charset=" + this.charSet);
+//		res.setContentType("application/json;charset=" + this.charSet);
 		chain.doFilter(request, response);
 	}
 

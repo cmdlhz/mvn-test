@@ -2,7 +2,6 @@ package com.mvn.test.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.mvn.test.service.UserInfoService;
 import com.mvn.test.service.impl.UserInfoServiceImpl;
+import com.mvn.test.vo.UserInfoVO;
 
 /**
  * Servlet implementation class UserInfoController
@@ -33,9 +33,11 @@ public class UserInfoController extends HttpServlet {
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
+		
 		System.out.println("2.doGet() @ UserInfoController");
 //		System.out.println(request.getCharacterEncoding());
-		List<Map<String, String>> uiList = uis.getUserList(null); // [com.mvn.test] service pkg => dao pkg =====> [config] mybatis-config.xml
+		List<UserInfoVO> uiList = uis.getUserList(null); // [com.mvn.test] service pkg => dao pkg =====> [config] mybatis-config.xml
 		response.getWriter().print(gson.toJson(uiList));
 	}
 

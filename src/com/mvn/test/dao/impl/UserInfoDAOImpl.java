@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.mvn.test.controller.InitServlet;
 import com.mvn.test.dao.UserInfoDAO;
+import com.mvn.test.vo.UserInfoVO;
 
 public class UserInfoDAOImpl implements UserInfoDAO {
 	
@@ -16,7 +17,7 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	private SqlSessionFactory ssf;
 	
 	@Override
-	public List<Map<String, String>> selectUserList(Map<String, String> pUser) {
+	public List<UserInfoVO> selectUserList(Map<String, String> pUser) {
 		
 		SqlSession ss = InitServlet.getSqlSession(); // InitServlet (in "controller" folder) // 연결한 준비만 하는 것
 		try {

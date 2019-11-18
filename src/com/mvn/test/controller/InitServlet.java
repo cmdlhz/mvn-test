@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.mvn.test.dao.impl.UserInfoDAOImpl;
 
 // loadOnStartup (서버가 켜질 때 실행되는 것) => preloading (요청이 들어오기 전에)
-@WebServlet(name="Init", urlPatterns = {"/*"}, loadOnStartup = 1)
+@WebServlet(name="Init", urlPatterns = {"/init"}, loadOnStartup = 1)
 public class InitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// sql 읽을 수 있게 미리 준비해 놓는 것

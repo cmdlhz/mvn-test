@@ -6,12 +6,13 @@ import java.util.Map;
 import com.mvn.test.dao.UserInfoDAO;
 import com.mvn.test.dao.impl.UserInfoDAOImpl;
 import com.mvn.test.service.UserInfoService;
+import com.mvn.test.vo.UserInfoVO;
 
 public class UserInfoServiceImpl implements UserInfoService {
 	private UserInfoDAO uidao = new UserInfoDAOImpl();
 	
 	@Override
-	public List<Map<String, String>> getUserList(Map<String, String> pUser) {
+	public List<UserInfoVO> getUserList(Map<String, String> pUser) {
 		return uidao.selectUserList(pUser);
 	}
 
