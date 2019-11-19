@@ -41,7 +41,7 @@ public class EncodingFilter implements Filter {
 		// 요청할 때
 		HttpServletRequest req = (HttpServletRequest)request;
 		req.setCharacterEncoding(this.charSet);
-		System.out.println("1.doFilter() @ EncodingFilter");
+//		System.out.println("1.doFilter() @ EncodingFilter");
 //		System.out.println(req.getCharacterEncoding());
 		
 		

@@ -41,17 +41,17 @@ public class UserInfoController extends HttpServlet {
 		String json = "";
 		
 		if("list".contentEquals(cmd)) {
-			List<UserInfoVO> uiList = uis.getUserList(null);
-			json = gson.toJson(uiList);
+			json = gson.toJson(uis.getUserList(null));
 			
 		}else if("view".contentEquals(cmd)) {
 			int uiNum = Integer.parseInt(request.getParameter("uiNum"));
-			// System.out.println(uiNum); // 61
 			UserInfoVO user = new UserInfoVO();
-//			System.out.println("user : " + user);
+			
 			user.setUiNum(uiNum);
-			System.out.println("user set : " + user);
-			json = gson.toJson(user);
+//			System.out.println("user set : " + user); // uiNum이 입력됨
+			
+			json = gson.toJson(uis.getUser(user)); // service
+//			System.out.println("json : " + json); // 여기서 json 형태로 찍히게 됨
 		}
 		response.getWriter().print(json);
 		

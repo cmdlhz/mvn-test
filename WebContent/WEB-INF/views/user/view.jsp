@@ -14,6 +14,10 @@ ${param.uiNum}
 		<h3 align="center"><b>User Info</b></h3>
 		<table class="table table-bordered">
 			<tr>
+				<th>#</th>
+				<td data-id="uiNum"></td>
+			</tr>
+			<tr>
 				<th>이름</th>
 				<td data-id="uiName"></td>
 			</tr>
@@ -28,7 +32,7 @@ ${param.uiNum}
 			<tr>
 				<th colspan="2">
 					<button type="button" class="btn btn-outline-success" onclick="update(this)">Update</button>
-					<button type="button" class="btn btn-outline-danger" onclick="delete()">Delete</button>
+					<button type="button" class="btn btn-outline-danger" onclick="deleteUser()">Delete</button>
 					<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/userList')">목록</button>
 				</th>
 			</tr>
@@ -42,19 +46,19 @@ window.onload = function(){
 	xhr.open('GET','/user/view?uiNum=${param.uiNum}');
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log("** xhr.responseText **  :  " + xhr.responseText);
+			
 			user = JSON.parse(xhr.responseText);
+		    console.log("** user **  :" + user);
+			
 			var tds = document.querySelectorAll('td[data-id]');
 			
-			for (var i = 0; i < tds.length; i++) {
-			    console.log("tds[i] : " + tds[i]);
-			    
+			for (var i = 0; i < tds.length; i++) {			    
 			    var td = tds[i];
 			    var key = td.getAttribute('data-id');
 			    
 			    console.log("key : " + key);
 			    td.innerHTML = user[key];
-
-				console.log(xhr.responseText);
 			}
 		}
 	}
@@ -77,7 +81,7 @@ function updateUser(){
 	alert('I need to edit');
 }
 
-function delete(){
+function deleteUser(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET','/user/delete');
 	xhr.onreadystatechange = function(){
