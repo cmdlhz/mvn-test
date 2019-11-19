@@ -17,6 +17,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return uidao.selectUserList(user);
 	}
 
+	
+	public UserInfoVO getUser(UserInfoVO user){
+		return uidao.selectUser(user);
+	}
+	
 	@Override
 	public Map<String, String> insertUser(UserInfoVO user) {
 		Map<String, String> rMap = new HashMap<String, String>();
@@ -30,8 +35,31 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return rMap;
 	}
+
 	
-	public UserInfoVO getUser(UserInfoVO user){
-		return uidao.selectUser(user);
+	public Map<String, String> updateUser(UserInfoVO user){
+		Map<String, String> rMap = new HashMap<String, String>();
+		int result = uidao.updateUser(user);
+		if(result == 1){
+			rMap.put("msg", "수정 SUCCESSSSSSSSS");
+			rMap.put("result", "true");
+		} else {
+			rMap.put("msg", "수정 FAILURE!!!!!");
+			rMap.put("result", "false");
+		}
+		return rMap;
+	}
+	
+	public Map<String, String> deleteUser(UserInfoVO user){
+		Map<String, String> rMap = new HashMap<String, String>();
+		int result = uidao.deleteUser(user);
+		if(result == 1){
+			rMap.put("msg", "삭제 SUCCESSSSSSSSS");
+			rMap.put("result", "true");
+		} else {
+			rMap.put("msg", "삭제 FAILURE!!!!!");
+			rMap.put("result", "false");
+		}
+		return rMap;
 	}
 }

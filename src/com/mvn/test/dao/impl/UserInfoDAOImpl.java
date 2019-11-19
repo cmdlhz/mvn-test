@@ -33,6 +33,19 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 		return null;
 	}
 	
+	public UserInfoVO selectUser(UserInfoVO user) {
+		SqlSession ss = InitServlet.getSqlSession();
+		try {
+			return ss.selectOne("UserInfo.selectUser", user);
+			// selectOne(String statement, Object parameter)
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return null;
+	}
+	
 	// Insert // insertUser
 	public int insertUser(UserInfoVO user){
 		SqlSession ss = InitServlet.getSqlSession();
@@ -49,21 +62,34 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 		return 0;
 	}
 	
-	public UserInfoVO selectUser(UserInfoVO user) {
+	public int updateUser(UserInfoVO user) {
 		SqlSession ss = InitServlet.getSqlSession();
 		try {
-			return ss.selectOne("UserInfo.selectUser", user);
-			// selectOne(String statement, Object parameter)
+			int cnt = ss.update("UserInfo.deleteUser", user); // 실제로 연결되는 곳
+			ss.commit(); // default가 false
+			return cnt;
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
+			// 잊지 말고 끊어주기!
 			ss.close();
 		}
-		return null;
+		return 0;
 	}
-	
-	// Update // getUser
-	// Delete // deleteUser
+	public int deleteUser(UserInfoVO user) {
+		SqlSession ss = InitServlet.getSqlSession();
+		try {
+			int cnt = ss.delete("UserInfo.updateUser", user); // 실제로 연결되는 곳
+			ss.commit(); // default가 false
+			return cnt;
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 잊지 말고 끊어주기!
+			ss.close();
+		}
+		return 0;
+	}
 	
 	public static void main(String[] args) {
 		UserInfoDAO udao = new UserInfoDAOImpl();

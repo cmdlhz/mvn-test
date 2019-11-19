@@ -19,15 +19,15 @@
  			</if>
  		</where>
  	</select>
- 	<update id="getUser">
+ 	<update id="updateUser">
  		update user_info set
- 			ui_name = #{ui_name}, 
- 			ui_id = #{ui_id}, 
- 			ui_pwd = #{ui_pwd}  
+ 			ui_name = #{uiName},
+ 			moddat = TO_CHAR(SYSDATE, 'YYYYMMDD'),
+ 			modtim = TO_CHAR(SYSDATE, 'HH24MISS') 
  		where ui_num = #{ui_num}
  	</update>
  	<delete id="deleteUser">
- 		delete from user_info where ui_num = #{ui_num}
+ 		delete from user_info where ui_num = #{uiNum}
  	</delete>
 </mapper>
 

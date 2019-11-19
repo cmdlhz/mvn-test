@@ -71,9 +71,22 @@ public class UserInfoController extends HttpServlet {
 			json += str;
 		}
 		UserInfoVO user = gson.fromJson(json, UserInfoVO.class);
+		String cmd = request.getRequestURI().substring(6);  // /user/
 		
-		Map<String,String> rMap = uis.insertUser(user);
-		json = gson.toJson(rMap);
+		
+		if("insert".contentEquals(cmd)) {
+			Map<String,String> rMap = uis.insertUser(user);
+			json = gson.toJson(rMap);
+			
+		}else if("update".contentEquals(cmd)) {
+			Map<String,String> rMap = uis.updateUser(user);
+			json = gson.toJson(rMap);
+			
+		}else if("delete".contentEquals(cmd)) {
+			Map<String,String> rMap = uis.deleteUser(user);
+			json = gson.toJson(rMap);
+			
+		}
 		response.getWriter().print(json);
 	}
 	// 넣어주지 않은 것은 null로 들어감
