@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>User List</title>
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
 <div class="container">
+	<h4>User List</h4>
 	<table class="table table-bordered">
 	 <thead class="thead-dark">
 	    <tr>
-	      <th scope="col">번호</th>
+	      <th scope="col">ID</th>
 	      <th scope="col">이름</th>
 	      <th scope="col">작성일</th>
 	      <th scope="col">작성시간</th>
@@ -25,7 +26,7 @@
 	  </tbody>
 	</table>
 </div>
-<button type="button" class="btn btn-outline-primary">글쓰기</button>
+<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">글쓰기</button>
 </body>
 <script>
 window.onload = function(){

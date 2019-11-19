@@ -1,5 +1,6 @@
 package com.mvn.test.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +17,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return uidao.selectUserList(pUser);
 	}
 
+	@Override
+	public List<UserInfoVO> insertUser(Map<String,String> pUser) {
+		List<UserInfoVO> pList = new ArrayList<>();
+		int result = uidao.insertUser(pUser);
+		if(result == 1){
+			System.out.println("Sign Up : Success!");
+		} else {
+			System.out.println("Sign Up : Failed!");
+		}
+		return pList;
+	}
 }

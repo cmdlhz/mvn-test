@@ -7,4 +7,27 @@
  	<select id="selectUserList" resultType = "com.mvn.test.vo.UserInfoVO">
  		select ui_num "uiNum", ui_name "uiName", ui_id "uiId", credat, cretim, moddat, modtim, active from user_info
  	</select>
+ 	<insert id="insertUser">
+ 		insert into user_info(ui_num, ui_name, ui_id, ui_pwd, credat, cretim, moddat, modtim, active) 
+ 		values(seq_ui_num.nextval, #{ui_num}, #{ui_name}, #{ui_pwd}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), '1')
+ 	</insert>
+ 	<update id="updateUser">
+ 		update user_info set
+ 			ui_name = #{ui_name}, 
+ 			ui_id = #{ui_id}, 
+ 			ui_pwd = #{ui_pwd}  
+ 		where ui_num = #{ui_num}
+ 	</update>
+ 	<delete id="deleteUser">
+ 		delete from user_info where ui_num = #{ui_num}
+ 	</delete>
 </mapper>
+
+<!--  		<where> -->
+<!--  			<if test='uiName != null'> -->
+<!--  				and ui_name #{uiName} -->
+<!--  			</if> -->
+<!--  			<if test='uiNum != null'> -->
+<!--  				and ui_num#{uiNum} -->
+<!--  			</if> -->
+<!--  		</where> -->

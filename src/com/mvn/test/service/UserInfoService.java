@@ -7,4 +7,5 @@ import com.mvn.test.vo.UserInfoVO;
 
 public interface UserInfoService {
 	public List<UserInfoVO> getUserList(Map<String, String> pUser);
+	public List<UserInfoVO> insertUser(Map<String,String> board);
 }
