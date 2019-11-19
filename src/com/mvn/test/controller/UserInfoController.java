@@ -37,10 +37,26 @@ public class UserInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 		
+		String cmd = request.getRequestURI().substring(6);  // /user/
+		String json = "";
+		
+		if("list".contentEquals(cmd)) {
+			List<UserInfoVO> uiList = uis.getUserList(null);
+			json = gson.toJson(uiList);
+			
+		}else if("view".contentEquals(cmd)) {
+			int uiNum = Integer.parseInt(request.getParameter("uiNum"));
+			// System.out.println(uiNum); // 61
+			UserInfoVO user = new UserInfoVO();
+//			System.out.println("user : " + user);
+			user.setUiNum(uiNum);
+			System.out.println("user set : " + user);
+			json = gson.toJson(user);
+		}
+		response.getWriter().print(json);
+		
 //		System.out.println("2.doGet() @ UserInfoController");
 //		System.out.println(request.getCharacterEncoding());
-		List<UserInfoVO> uiList = uis.getUserList(null); // [com.mvn.test] service pkg => dao pkg =====> [config] mybatis-config.xml
-		response.getWriter().print(gson.toJson(uiList));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

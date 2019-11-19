@@ -49,12 +49,28 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 		return 0;
 	}
 	
-	// Update // updateUser
+	public UserInfoVO selectUser(UserInfoVO user) {
+		SqlSession ss = InitServlet.getSqlSession();
+		try {
+			return ss.selectOne("UserInfo.selectUser", user);
+			// selectOne(String statement, Object parameter)
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return null;
+	}
+	
+	// Update // getUser
 	// Delete // deleteUser
 	
 	public static void main(String[] args) {
 		UserInfoDAO udao = new UserInfoDAOImpl();
 		Map<String, String> pUser = new HashMap<>();
 		System.out.println(udao.selectUserList(pUser));
+//		UserInfoVO pUser = new UserInfoVO<>();
+//		user.setUiNum(21);
+//		System.out.println(uidao.selectUser(pUser));
 	}
 }

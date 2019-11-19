@@ -13,8 +13,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	private UserInfoDAO uidao = new UserInfoDAOImpl();
 	
 	@Override
-	public List<UserInfoVO> getUserList(Map<String, String> pUser) {
-		return uidao.selectUserList(pUser);
+	public List<UserInfoVO> getUserList(Map<String, String> user) {
+		return uidao.selectUserList(user);
 	}
 
 	@Override
@@ -29,5 +29,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 			rMap.put("result", "false");
 		}
 		return rMap;
+	}
+	
+	public UserInfoVO getUser(UserInfoVO user){
+		return uidao.selectUser(user);
 	}
 }

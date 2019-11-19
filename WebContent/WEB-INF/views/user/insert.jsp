@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<h3 align="center"><b>게시물 작성</b></h3>
+		<h3 align="center"><b>Sign Up</b></h3>
 		<table class="table table-bordered">
 			<tr>
 				<th>이름</th>
@@ -86,6 +86,9 @@ function save(){
 		uiId : document.querySelector('#uiId').value,
 		uiPwd : document.querySelector('#uiPwd').value
 	}
+// 	console.log("param : " + param);
+	console.log("JSON.stringify(param) : " + JSON.stringify(param));
+
 	xhr.send(JSON.stringify(param));
 	return true;
 }

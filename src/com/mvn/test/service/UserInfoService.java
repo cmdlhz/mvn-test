@@ -6,6 +6,7 @@ import java.util.Map;
 import com.mvn.test.vo.UserInfoVO;
 
 public interface UserInfoService {
-	public List<UserInfoVO> getUserList(Map<String, String> pUser);
+	public List<UserInfoVO> getUserList(Map<String, String> user);
 	public Map<String, String> insertUser(UserInfoVO user);
+	public UserInfoVO getUser(UserInfoVO user);
 }

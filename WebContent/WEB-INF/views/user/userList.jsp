@@ -24,9 +24,13 @@
 	  	  <td colspan="5" align="center">내용 없음</td>
 	  	</tr>
 	  </tbody>
+	  <tbody>
+	  	<tr>
+	  		<td colspan="5" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">Sign Up</button></td>
+	  	</tr>
+	  </tbody>
 	</table>
 </div>
-<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">글쓰기</button>
 <!-- goPage(url) @ bt>js>common.js : location.href = '/views' + url; -->
 </body>
 <script>
@@ -34,20 +38,25 @@ window.onload = function(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET','/user/list');
 	xhr.onreadystatechange = function(){
-		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log(xhr.responseText);
-			var userList = JSON.parse(xhr.responseText);
-			var tBody = document.getElementById('tBody');
-			var html = '';
-			for(var user of userList){
-				html += '<tr>';
-				html += '<td>' + user.uiId + '</td>';
-				html += '<td>' + user.uiName + '</td>';
-				html += '<td>' + user.credat + '</td>';
-				html += '<td>' + user.cretim + '</td>';
-				html += '</tr>';
-			}
-			tBody.innerHTML = html;
+		if(xhr.readyState == xhr.DONE){
+// 			console.log(xhr.readyState);
+			 if(xhr.status == 200){
+// 				 	console.log(xhr.status);
+// 				 	console.log(xhr.responseText);
+				 	
+					var userList = JSON.parse(xhr.responseText);
+					var tBody = document.getElementById('tBody');
+					var html = '';
+					for(var user of userList){
+						html += '<tr>';
+						html += '<td onclick="goPage(\'/user/view?uiNum=' + user.uiNum + '\')">' + user.uiId + '</td>';
+						html += '<td>' + user.uiName + '</td>';
+						html += '<td>' + user.credat + '</td>';
+						html += '<td>' + user.cretim + '</td>';
+						html += '</tr>';
+					}
+					tBody.innerHTML = html;
+				}
 		}
 	}
 	xhr.send();
