@@ -65,7 +65,7 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	public int updateUser(UserInfoVO user) {
 		SqlSession ss = InitServlet.getSqlSession();
 		try {
-			int cnt = ss.update("UserInfo.deleteUser", user); // 실제로 연결되는 곳
+			int cnt = ss.update("UserInfo.updateUser", user); // 실제로 연결되는 곳
 			ss.commit(); // default가 false
 			return cnt;
 		} catch(Exception e) {
@@ -79,7 +79,7 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	public int deleteUser(UserInfoVO user) {
 		SqlSession ss = InitServlet.getSqlSession();
 		try {
-			int cnt = ss.delete("UserInfo.updateUser", user); // 실제로 연결되는 곳
+			int cnt = ss.delete("UserInfo.deleteUser", user); // 실제로 연결되는 곳
 			ss.commit(); // default가 false
 			return cnt;
 		} catch(Exception e) {
@@ -93,8 +93,10 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	
 	public static void main(String[] args) {
 		UserInfoDAO udao = new UserInfoDAOImpl();
-		Map<String, String> pUser = new HashMap<>();
-		System.out.println(udao.selectUserList(pUser));
+//		Map<String, String> pUser = new HashMap<>();
+		UserInfoVO user = new UserInfoVO();
+		user.setUiNum(61);
+		System.out.println(udao.deleteUser(user));
 //		UserInfoVO pUser = new UserInfoVO<>();
 //		user.setUiNum(21);
 //		System.out.println(uidao.selectUser(pUser));

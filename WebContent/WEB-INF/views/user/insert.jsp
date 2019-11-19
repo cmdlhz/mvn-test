@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<h3 align="center"><b>Sign Up</b></h3>
+		<h3 class="display-3" align="center">Sign Up</h3>
 		<table class="table table-bordered">
 			<tr>
 				<th>이름</th>
@@ -28,10 +28,10 @@
 				<td><input type="text" id="uiPwdCheck" placeholder="Enter password again."></td>
 			</tr>
 			<tr>
-				<th colspan="2">
+				<td colspan="2" align="center">
 					<button type="button" class="btn btn-outline-success" onclick="save()">저장</button>
 					<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/userList')">목록</button>
-				</th>
+				</td>
 			</tr>
 		</table>
 	</div>

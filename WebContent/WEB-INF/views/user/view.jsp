@@ -9,9 +9,8 @@
 
 </head>
 <body>
-${param.uiNum}
 	<div class="container">
-		<h3 align="center"><b>User Info</b></h3>
+		<h3 class="display-3" align="center">User Info</h3>
 		<table class="table table-bordered">
 			<tr>
 				<th>#</th>
@@ -30,11 +29,12 @@ ${param.uiNum}
 				<td data-id="active"></td>
 			</tr>
 			<tr>
-				<th colspan="2">
-					<button type="button" class="btn btn-outline-success" onclick="update(this)">Update</button>
+				<td colspan="2" align="center">
+					<button type="button" class="btn btn-outline-warning" onclick="editable(this)">editable</button>
+					<button type="button" class="btn btn-outline-success" onclick="updateUser()">Update</button>
 					<button type="button" class="btn btn-outline-danger" onclick="deleteUser()">Delete</button>
 					<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/userList')">목록</button>
-				</th>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -46,18 +46,17 @@ window.onload = function(){
 	xhr.open('GET','/user/view?uiNum=${param.uiNum}');
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("** xhr.responseText **  :  " + xhr.responseText);
+// 			console.log("** xhr.responseText **  :  " + xhr.responseText);
 			
 			user = JSON.parse(xhr.responseText);
-		    console.log("** user **  :" + user);
+// 		    console.log("** user **  :" + user);
 			
 			var tds = document.querySelectorAll('td[data-id]');
 			
 			for (var i = 0; i < tds.length; i++) {			    
 			    var td = tds[i];
 			    var key = td.getAttribute('data-id');
-			    
-			    console.log("key : " + key);
+// 			    console.log("key : " + key);
 			    td.innerHTML = user[key];
 			}
 		}
@@ -65,38 +64,59 @@ window.onload = function(){
 	xhr.send();
 }
 
-function update(btn){
-	btn.onclick = updateUser;
-	
+function editable(btn){
 	var tds = document.querySelectorAll('td[data-id=active], td[data-id=uiName]');
 	for(var i=0; i<tds.length; i++){
 		var td = tds[i];
-		var td = td.getAttribute('data-id');
-		td.innerHTML = '<input type="text" id="' + id + '"value = "' + user[id] + '">';
+		var id = td.getAttribute('data-id');
+		td.innerHTML = '<input type="text" id="' + id + '" value ="' + user[id] + '">';
 	}
 }
 
 // 버튼을 2개 만들어서 조건에 따라 보이게, 안 보이게 하는 것이 나음
 function updateUser(){
-	alert('I need to edit');
+	console.log("update btn : activated");
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/user/update');
+	xhr.onreadystatechange = function(){
+// 		console.log("xhr.readystate : " + xhr.readystate);
+// 		console.log("xhr.status : " + xhr.status);
+		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log("xhr.responseText : " + xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
+			alert(res.msg);
+			if(res.result == 'true'){
+				goPage('/user/userList');
+			}
+		}
+	}
+	var param = {
+		uiNum : user.uiNum,
+		uiName : document.querySelector('#uiName').value,
+		active : document.querySelector('#active').value
+	}
+	xhr.send(JSON.stringify(param));
 }
 
 function deleteUser(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET','/user/delete');
+	xhr.open('POST','/user/delete');
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			user = JSON.parse(xhr.responseText);
+// 			console.log("xhr.readystate : " + xhr.readyState);
+// 			console.log("xhr.status : " + xhr.status);
+			console.log("xhr.responseText : " + xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
 			alert(res.msg);
 			if(res.result == 'true'){
-				goPage('user/userList');
+				goPage('/user/userList');
 			}
 		}
 	}
 	var param = {
 		uiNum : user.uiNum
 	}
-	xhr.send(JSON.stringify(user));
+	xhr.send(JSON.stringify(param));
 	
 }
 </script>

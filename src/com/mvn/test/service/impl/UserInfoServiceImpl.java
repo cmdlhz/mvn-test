@@ -24,42 +24,43 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Override
 	public Map<String, String> insertUser(UserInfoVO user) {
-		Map<String, String> rMap = new HashMap<String, String>();
+		Map<String, String> iMap = new HashMap<String, String>();
 		int result = uidao.insertUser(user);
 		if(result == 1){
-			rMap.put("msg", "등록 SUCCESSSSSSSSS");
-			rMap.put("result", "true");
+			iMap.put("msg", "등록 SUCCESSSSSSSSS");
+			iMap.put("result", "true");
 		} else {
-			rMap.put("msg", "등록 FAILURE!!!!!");
-			rMap.put("result", "false");
+			iMap.put("msg", "등록 FAILURE!!!!!");
+			iMap.put("result", "false");
 		}
-		return rMap;
+		return iMap;
 	}
 
 	
 	public Map<String, String> updateUser(UserInfoVO user){
-		Map<String, String> rMap = new HashMap<String, String>();
+		Map<String, String> uMap = new HashMap<String, String>();
 		int result = uidao.updateUser(user);
+//		System.out.println(result);
 		if(result == 1){
-			rMap.put("msg", "수정 SUCCESSSSSSSSS");
-			rMap.put("result", "true");
+			uMap.put("msg", "수정 SUCCESSSSSSSSS");
+			uMap.put("result", "true");
 		} else {
-			rMap.put("msg", "수정 FAILURE!!!!!");
-			rMap.put("result", "false");
+			uMap.put("msg", "수정 FAILURE!!!!!");
+			uMap.put("result", "false");
 		}
-		return rMap;
+		return uMap;
 	}
 	
 	public Map<String, String> deleteUser(UserInfoVO user){
-		Map<String, String> rMap = new HashMap<String, String>();
+		Map<String, String> dMap = new HashMap<String, String>();
 		int result = uidao.deleteUser(user);
 		if(result == 1){
-			rMap.put("msg", "삭제 SUCCESSSSSSSSS");
-			rMap.put("result", "true");
+			dMap.put("msg", "삭제 SUCCESSSSSSSSS");
+			dMap.put("result", "true");
 		} else {
-			rMap.put("msg", "삭제 FAILURE!!!!!");
-			rMap.put("result", "false");
+			dMap.put("msg", "삭제 FAILURE!!!!!");
+			dMap.put("result", "false");
 		}
-		return rMap;
+		return dMap;
 	}
 }

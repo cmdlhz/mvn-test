@@ -48,10 +48,11 @@ public class UserInfoController extends HttpServlet {
 			UserInfoVO user = new UserInfoVO();
 			
 			user.setUiNum(uiNum);
-//			System.out.println("user set : " + user); // uiNum이 입력됨
+			System.out.println("user set : " + user); // uiNum이 입력됨
 			
 			json = gson.toJson(uis.getUser(user)); // service
-//			System.out.println("json : " + json); // 여기서 json 형태로 찍히게 됨
+			System.out.println("uis.getUser(user) : " + uis.getUser(user));
+			System.out.println("json : " + json); // 여기서 json 형태로 찍히게 됨
 		}
 		response.getWriter().print(json);
 		
@@ -70,21 +71,23 @@ public class UserInfoController extends HttpServlet {
 //			json.append(str);
 			json += str;
 		}
-		UserInfoVO user = gson.fromJson(json, UserInfoVO.class);
+		
+		UserInfoVO user = new UserInfoVO();
+		
 		String cmd = request.getRequestURI().substring(6);  // /user/
 		
 		
 		if("insert".contentEquals(cmd)) {
-			Map<String,String> rMap = uis.insertUser(user);
-			json = gson.toJson(rMap);
+			user = gson.fromJson(json, UserInfoVO.class);
+			json = gson.toJson(uis.insertUser(user));
 			
 		}else if("update".contentEquals(cmd)) {
-			Map<String,String> rMap = uis.updateUser(user);
-			json = gson.toJson(rMap);
+			user = gson.fromJson(json, UserInfoVO.class);
+			json = gson.toJson(uis.updateUser(user));
 			
 		}else if("delete".contentEquals(cmd)) {
-			Map<String,String> rMap = uis.deleteUser(user);
-			json = gson.toJson(rMap);
+			user = gson.fromJson(json, UserInfoVO.class);
+			json = gson.toJson(uis.deleteUser(user));
 			
 		}
 		response.getWriter().print(json);

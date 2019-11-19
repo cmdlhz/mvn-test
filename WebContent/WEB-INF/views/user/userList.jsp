@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-	<h4>User List</h4>
+	<h1 class="display-3" align="center">User List</h1>
 	<table class="table table-bordered">
 	 <thead class="thead-dark">
 	    <tr>
