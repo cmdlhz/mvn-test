@@ -16,3 +16,5 @@ public class UserInfoVO {
 }
 
 // 노란색 줄이 없어서 => 다 적용된것으로 확인됨
+
+// 해당 키 값으로 setter method를 찾아내서 호출!

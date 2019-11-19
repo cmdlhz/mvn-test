@@ -1,6 +1,6 @@
 package com.mvn.test.service.impl;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +18,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfoVO> insertUser(Map<String,String> pUser) {
-		List<UserInfoVO> pList = new ArrayList<>();
-		int result = uidao.insertUser(pUser);
+	public Map<String, String> insertUser(UserInfoVO user) {
+		Map<String, String> rMap = new HashMap<String, String>();
+		int result = uidao.insertUser(user);
 		if(result == 1){
-			System.out.println("Sign Up : Success!");
+			rMap.put("msg", "등록 SUCCESSSSSSSSS");
+			rMap.put("result", "true");
 		} else {
-			System.out.println("Sign Up : Failed!");
+			rMap.put("msg", "등록 FAILURE!!!!!");
+			rMap.put("result", "false");
 		}
-		return pList;
+		return rMap;
 	}
 }

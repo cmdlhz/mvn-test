@@ -1,7 +1,9 @@
 package com.mvn.test.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,10 +46,21 @@ public class UserInfoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 		
-		List<UserInfoVO> iUser = uis.insertUser(null); // [com.mvn.test] service pkg => dao pkg =====> [config] mybatis-config.xml
-		response.getWriter().print(gson.toJson(iUser));
+		BufferedReader br = request.getReader();
+		String str = null;
+//		StringBuffer json = new StringBuffer();
+		String json = "";
+		while((str=br.readLine()) != null) {
+//			json.append(str);
+			json += str;
+		}
+		UserInfoVO user = gson.fromJson(json, UserInfoVO.class);
+		
+		Map<String,String> rMap = uis.insertUser(user);
+		json = gson.toJson(rMap);
+		response.getWriter().print(json);
 	}
-
+	// 넣어주지 않은 것은 null로 들어감
 }
 
 

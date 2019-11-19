@@ -27,6 +27,7 @@
 	</table>
 </div>
 <button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">글쓰기</button>
+<!-- goPage(url) @ bt>js>common.js : location.href = '/views' + url; -->
 </body>
 <script>
 window.onload = function(){

@@ -34,10 +34,12 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	}
 	
 	// Insert // insertUser
-	public int insertUser(Map<String, String> pUser){
+	public int insertUser(UserInfoVO user){
 		SqlSession ss = InitServlet.getSqlSession();
 		try {
-			return ss.selectList("UserInfo.insertUser"); // 실제로 연결되는 곳
+			int cnt = ss.insert("UserInfo.insertUser", user); // 실제로 연결되는 곳
+			ss.commit(); // default가 false
+			return cnt;
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

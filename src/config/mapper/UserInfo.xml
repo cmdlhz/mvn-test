@@ -3,13 +3,13 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserInfo">
+<mapper namespace="UserInfo"> <!-- namespace는 C언어에서도 많이 쓰임 -->
  	<select id="selectUserList" resultType = "com.mvn.test.vo.UserInfoVO">
  		select ui_num "uiNum", ui_name "uiName", ui_id "uiId", credat, cretim, moddat, modtim, active from user_info
  	</select>
  	<insert id="insertUser">
  		insert into user_info(ui_num, ui_name, ui_id, ui_pwd, credat, cretim, moddat, modtim, active) 
- 		values(seq_ui_num.nextval, #{ui_num}, #{ui_name}, #{ui_pwd}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), '1')
+ 		values(seq_ui_num.nextval, #{uiName}, #{uiId}, #{uiPwd}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), '1')
  	</insert>
  	<update id="updateUser">
  		update user_info set
