@@ -22,9 +22,13 @@ ${param.uiNum}
 				<td data-id="uiId"></td>
 			</tr>
 			<tr>
+				<th>Active</th>
+				<td data-id="active"></td>
+			</tr>
+			<tr>
 				<th colspan="2">
-					<button type="button" class="btn btn-outline-success" onclick="update()">Update</button>
-					<button type="button" class="btn btn-outline-danger" onclick="update()">Delete</button>
+					<button type="button" class="btn btn-outline-success" onclick="update(this)">Update</button>
+					<button type="button" class="btn btn-outline-danger" onclick="delete()">Delete</button>
 					<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/userList')">목록</button>
 				</th>
 			</tr>
@@ -56,6 +60,23 @@ window.onload = function(){
 	}
 	xhr.send();
 }
+
+function update(btn){
+	btn.onclick = updateUser;
+	
+	var tds = document.querySelectorAll('td[data-id=active], td[data-id=uiName]');
+	for(var i=0; i<tds.length; i++){
+		var td = tds[i];
+		var td = td.getAttribute('data-id');
+		td.innerHTML = '<input type="text" id="' + id + '"value = "' + user[id] + '">';
+	}
+}
+
+// 버튼을 2개 만들어서 조건에 따라 보이게, 안 보이게 하는 것이 나음
+function updateUser(){
+	alert('I need to edit');
+}
+
 function delete(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET','/user/delete');
