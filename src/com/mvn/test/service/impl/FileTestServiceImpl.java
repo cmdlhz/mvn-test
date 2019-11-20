@@ -16,7 +16,7 @@ import com.mvn.test.vo.FileTestVO;
 
 public class FileTestServiceImpl implements FileTestService {
 	private FileTestDAO ftdao = new FileTestDAOImpl();
-	private String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img";
+	private String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img\\";
 	
 	public List<FileTestVO> getFileList(Map<String, String> file){
 		return ftdao.selectFileList(file);

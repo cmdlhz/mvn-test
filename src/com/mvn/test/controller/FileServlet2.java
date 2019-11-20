@@ -65,12 +65,14 @@ public class FileServlet2 extends HttpServlet {
 					 } else {
 						 // 파일 자체가 담기는 것 ==> 그래서 Object로 넘김
 						 param.put(key, fi);
-//						 String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img";
+						 System.out.println("param : " + param);
+//						 String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img\\";
 //						 String fileName = fi.getName();
 //						 File targetFile = new File(path + "\\" + fileName);
 //						 fi.write(targetFile);
 					 }
 				 }
+				 System.out.println("param : " + param);
 				 fts.insertFileTest(param);
 				 // {fileField=
 				 //		name=Koala.jpg, StoreLocation=null, size=780831 bytes, isFormField=false, FieldName=fileField, 

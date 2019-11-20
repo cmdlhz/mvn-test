@@ -47,9 +47,10 @@ window.onload = function(){
 						html += '<td>' + file.ftNum + '</td>';
 						html += '<td>' + file.ftId + '</td>';
 						html += '<td>' + file.ftName + '</td>';
-						html += '<td>' + file.ftFile + '</td>';
+						html += '<td><img src="' + file.ftFile + '" width=100></td>';
 						html += '</tr>';
 					}
+					console.log(file.ftFile);
 					tBody.innerHTML = html;
 				}
 		}

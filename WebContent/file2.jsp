@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
-<form method="POST" action="/file2" enctype="multipart/form-data">
+<form method="POST" action="/file/upload" enctype="multipart/form-data">
   <div class="form-group">
     <label>File Upload</label>
     <input type="file" class="form-control" name="ftFile">
@@ -20,6 +20,7 @@
     <div class="form-group">
     <label>이름</label>
     <input type="text" class="form-control" name="ftName">
+    
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
