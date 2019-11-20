@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container text-center">
 	<h1 class="display-3" align="center">File List</h1>
 	<table class="table table-bordered">
 	 <thead class="thead-dark">
@@ -23,6 +23,11 @@
 	  <tbody id="tBody">
 	  	<tr>
 	  	  <td colspan="5" align="center">파일 없음</td>
+	  	</tr>
+	  </tbody>
+	  <tbody>
+	  	<tr>
+	  		<td colspan="5" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/file/insert')">ADD</button></td>
 	  	</tr>
 	  </tbody>
 	</table>

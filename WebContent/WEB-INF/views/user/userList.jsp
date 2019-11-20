@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
-<div class="container">
+<div class="container text-center" >
 	<h1 class="display-3" align="center">User List</h1>
 	<table class="table table-bordered">
 	 <thead class="thead-dark">
