@@ -42,7 +42,7 @@ window.onload = function(){
 // 			console.log(xhr.readyState);
 			 if(xhr.status == 200){
 // 				 	console.log(xhr.status);
-// 				 	console.log(xhr.responseText);
+				 	console.log(xhr.responseText);
 				 	
 					var userList = JSON.parse(xhr.responseText);
 					var tBody = document.getElementById('tBody');

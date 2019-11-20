@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileTest"> <!-- namespace는 C언어에서도 많이 쓰임 -->
+ 	<select id="selectFileList" resultType = "com.mvn.test.vo.FileTestVO">
+ 		select ft_num "ftNum", ft_id "ftId", ft_name "ftName", ft_file "ftFile" from file_test
+ 	</select>
+ 	
+ 	<insert id="insertFileTest">
+ 		insert into file_test(ft_num, ft_id, ft_name, ft_file) 
+ 		values(seq_ft_num.nextval, #{ftId}, #{ftName}, #{ftFile})
+ 	</insert>
+</mapper>
+

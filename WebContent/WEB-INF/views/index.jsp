@@ -12,6 +12,7 @@ String rPath = request.getContextPath();
 </head>
 <body>
 	<a style="text-decoration:none" href="${rootPath}/views/user/userList">ajax list 가기</a><br>
+	<a style="text-decoration:none" href="${rootPath}/views/file/fileList">file list 가기</a><br>
 
 <%-- 	rootPath: ${rootPath}<br> --%>
 <%-- 	jsPath: ${jsPath}<br> --%>
