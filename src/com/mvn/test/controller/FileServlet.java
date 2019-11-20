@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet("/file")
 public class FileServlet extends HttpServlet {
@@ -37,8 +38,30 @@ public class FileServlet extends HttpServlet {
  		sfu.setFileSizeMax(fileSize); // 각각의 file max
  		sfu.setSizeMax(totalSize); // 총 size max
  		
- 		boolean isForm = ServletFileUpload.isMultipartContent(request);
- 		System.out.println(isForm);
+ 		if(ServletFileUpload.isMultipartContent(request)) {
+ 	 		try {
+ 	 			List<FileItem> fList = sfu.parseRequest(request);
+ 	 			for(FileItem fi:fList) {
+ 	 				String key = fi.getFieldName();
+ 	 				if(fi.isFormField()) {
+ 	 					String value = fi.getString("utf-8");
+ 	 					System.out.println(key + ":" + value);
+ 	 				} else {
+ 	 					// " " 안에 복붙 했을 때 \ 자동 생성
+ 	 					String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img";
+ 	 					String fileName = fi.getName();
+ 	 					File targetFile = new File(path + "\\" + fileName);
+ 	 					fi.write(targetFile);
+ 	 				}
+// 	 				System.out.println(fi.getFieldName()); // id
+ 	 			}
+ 	 		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 		} else {
+ 			throw new ServletException("파일 형식이 잘못되었습니다.");
+ 		}
 	}
 	
 	public static void main(String[] args) {
