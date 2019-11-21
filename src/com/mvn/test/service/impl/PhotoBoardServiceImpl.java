@@ -38,13 +38,15 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 			pb.setPbContent((String)photo.get("pbContent"));
 			pb.setCreusr(Integer.parseInt((String)photo.get("creusr")));
 			if(photo.get("pbImg1") != null) {
-				FileItem fi = (FileItem) photo.get("pbImg1");
+				FileItem fi = (FileItem)photo.get("pbImg1");
 				pb.setPbImg1(fi.getName());
 			}
 			if(photo.get("pbImg2") != null) {
-				FileItem fi = (FileItem) photo.get("pbImg2");
+				FileItem fi = (FileItem)photo.get("pbImg2");
 				pb.setPbImg2(fi.getName());
 			}
+			
+			// DAO로 넘어가기
 			int result= pbdao.insertPhoto(ss, photo);
 			Map<String, String> pbMap = new HashMap<String, String>();
 			if(result == 1) {
@@ -59,6 +61,8 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		} catch(Exception e) {
 			ss.rollback();
 			e.printStackTrace();
+		} finally {
+			ss.close();
 		}
 		return null;
 	}

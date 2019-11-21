@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.ibatis.session.SqlSession;
 
 import com.google.gson.Gson;
 import com.mvn.test.service.PhotoBoardService;
@@ -67,6 +68,8 @@ public class PhotoController extends HttpServlet {
 		String cmd = request.getRequestURI().substring(7); // /photo/
 		
 		if("insert".contentEquals(cmd)) {
+			SqlSession ss = InitServlet.getSqlSession();
+			
 			int memSize = 1024 * 1024 * 5;
 			int totalSize = 1024 * 1024 * 400;
 			int fileSize = 1024 * 1024 * 400;
@@ -95,7 +98,9 @@ public class PhotoController extends HttpServlet {
 						 }
 					 }
 					 System.out.println("param : " + param);
-					 pbs.getPhoto(photo);
+					 // 여기가 문제인 것 같은데...
+					// Service로 넘어가기
+					 pbs.insertPhoto(ss, param);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}

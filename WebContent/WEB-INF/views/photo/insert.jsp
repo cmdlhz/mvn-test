@@ -16,7 +16,7 @@
 		<h3>Img 2 :</h3> <input type="file" id="pbImg2" /><br><br> <!-- array 형태로 저장됨 -->
 		<progress id="pro" value="0" max="100"></progress><br><br>
 		<div id="rDiv"></div>
-		<button type="submit" class="btn btn-outline-success" onclick="upload()">UPLOAD</button>
+		<button onclick="upload()">UPLOAD</button>
 	</div>
 </body>
 <script>
@@ -24,7 +24,7 @@ function upload(){
 	var xhr = new XMLHttpRequest();
 	
 	xhr.upload.addEventListener('progress', function(e){
-		console.log("event : " + e);
+// 		console.log("event : " + e);
 		var percentage = (e.loaded/e.total) * 100;
 		pro.value = percentage;
 		rDiv.innerHTML = Math.floor(percentage) + '%';
@@ -34,7 +34,8 @@ function upload(){
 	var formData = new FormData();
 	
 	console.log("creusr : " + document.querySelector('#creusr').value);
-	console.log("creusr : " + document.querySelector('#pbImg1').files[0]);
+	console.log("pbImg1 (name) : " + document.querySelector('#pbImg1').files[0].name);
+	console.log("pbImg1 (type) : " + document.querySelector('#pbImg1').files[0].type);
 	
 	formData.append('pbTitle', document.querySelector('#pbTitle').value);
 	formData.append('pbContent', document.querySelector('#pbContent').value);
@@ -42,22 +43,29 @@ function upload(){
 	formData.append('pbImg1', document.querySelector('#pbImg1').files[0]);
 	formData.append('pbImg2', document.querySelector('#pbImg2').files[0]);
 	
-	for(var i=0; i<formData.length; i++){
-		console.log("formData : " + formData[i]);
+	for (var value of formData.values()) {
+		console.log("formData value : " + value);
 	}
-	
+		
 	xhr.open('POST', '/photo/insert');
+	
 	xhr.onreadystatechange = function(){
+		console.log("xhr.readyState : " + xhr.readyState);
+		console.log("xhr.status : " + xhr.status);
+		
+		console.log("xhr.responseText : " + xhr.responseText);
+		
 		if(xhr.readyState == 4 && xhr.status == 200){
 			var res = JSON.parse(xhr.responseText);
 			console.log("res.msg : " + res.msg);
 			if(res.result == 'true'){
-				 goPage('/photo/list');
+				goPage('/photo/list');
 			} else {
-				
+				console.log('실패....');
 			}
 		}
 	}	
+	
 	xhr.send(formData);
 }
 </script>

@@ -42,6 +42,7 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 
 	@Override
 	public int insertPhoto(SqlSession ss, Map<String, Object> photo){
+		// iBatis : namespace.id 
 		return ss.insert("PhotoBoard.insertPhoto", photo);
 	}
 
