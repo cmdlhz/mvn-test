@@ -22,12 +22,12 @@
 	  </thead>
 	  <tbody id="tBody">
 	  	<tr>
-	  	  <td colspan="5" align="center">파일 없음</td>
+	  	  <td colspan="4" align="center">파일 없음</td>
 	  	</tr>
 	  </tbody>
 	  <tbody>
 	  	<tr>
-	  		<td colspan="5" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/file/insert')">ADD</button></td>
+	  		<td colspan="4" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/file/insert')">ADD</button></td>
 	  	</tr>
 	  </tbody>
 	</table>

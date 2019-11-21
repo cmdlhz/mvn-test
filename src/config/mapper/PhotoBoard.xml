@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="PhotoBoard"> <!-- namespace는 C언어에서도 많이 쓰임 -->
+	<resultMap type="com.mvn.test.vo.PhotoBoardVO" id="pb"> <!-- type? map? -->
+		<result property="pbContent" column="pb_content" jdbcType="CLOB" javaType="string" />
+	</resultMap>
+
+	<select id="selectPhotoList" resultType = "com.mvn.test.vo.PhotoBoardVO">
+		select pb_num "pbNum", pb_title "pbTitle", pb_content "pbContent", pb_img1 "pbImg1", pb_img2 "pbImg2", credat, cretim, creusr, moddat, modtim, modusr, pb_cnt "pbCnt" from photo_board
+	</select>
+	<select id="selectPhoto" resultType = "com.mvn.test.vo.PhotoBoardVO">
+		select pb_num "pbNum", pb_title "pbTitle", pb_content "pbContent", pb_img1 "pbImg1", pb_img2 "pbImg2", credat, cretim, creusr, moddat, modtim, modusr, pb_cnt "pbCnt" from photo_board
+		<where>
+			<if test="pbNum != null">
+				pb_num = #{pbNum}
+			</if>
+		</where>
+	</select>
+	<insert id="insertPhoto" parameterType="com.mvn.test.vo.PhotoBoardVO">
+		insert into photo_board(pb_num, pb_title, pb_content, pb_img1, pb_img2,  credat, cretim, creusr, moddat, modtim, modusr, pb_cnt) 
+		values(SEQ_pb_num.nextval, #{pbTitle}, #{pbContent}, #{pbImg1}, #{pbImg2}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, 0)
+	</insert>
+	<update id="updatePhoto">
+		update photo_board 
+		set pb_title = #{pbTitle}, 
+ 		moddat = TO_CHAR(SYSDATE, 'YYYYMMDD'), 
+ 		modtim = TO_CHAR(SYSDATE, 'HH24MISS'), 
+		modusr = #{modusr}, 
+		pb_cnt = #{pbCnt} + 1, 
+		where pb_num = #{pbNum} 		
+	</update>
+	<delete id="deletePhoto">
+		delete from photo_board where pb_num = #{pbNum}
+	</delete>
+</mapper>

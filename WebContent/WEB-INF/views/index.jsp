@@ -11,8 +11,9 @@ String rPath = request.getContextPath();
 <title>Index</title>
 </head>
 <body>
-	<a style="text-decoration:none" href="${rootPath}/views/user/userList">ajax list 가기</a><br>
-	<a style="text-decoration:none" href="${rootPath}/views/file/fileList">file list 가기</a><br>
+	<a style="text-decoration:none" href="${rootPath}/views/user/userList">User List 가기</a><br>
+	<a style="text-decoration:none" href="${rootPath}/views/file/fileList">File List 가기</a><br>
+	<a style="text-decoration:none" href="${rootPath}/views/photo/list">Photo Board 보기</a><br>
 
 <%-- 	rootPath: ${rootPath}<br> --%>
 <%-- 	jsPath: ${jsPath}<br> --%>
