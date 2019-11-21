@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<progress id="pro" value="0" max="100"></progress>
+<div id="rDiv"></div>
+<script>
+window.onload = function(){
+	var pro = document.querySelector("#pro");
+	var rDiv = document.querySelector("#rDiv");
+	var i = 1;
+	var sInt = setInterval(function(){
+		rDiv.innerHTML = (i/parseInt(pro.max)) * 100 + '%';
+		pro.value = i++;
+		if(i == 1001) clearInterval(sInt);
+	}, 10); // window에서 기본적으로 제공하는 function
+}
+</script>
+</body>
+</html>

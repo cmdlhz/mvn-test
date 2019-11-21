@@ -40,8 +40,8 @@ public class FileServlet2 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memSize = 1024 * 1024 * 5;
-		int totalSize = 1024 * 1024 * 50;
-		int fileSize = 1024 * 1024 * 10;
+		int totalSize = 1024 * 1024 * 400;
+		int fileSize = 1024 * 1024 * 400;
 		
 		DiskFileItemFactory dfif = new DiskFileItemFactory();
 		dfif.setSizeThreshold(memSize);
@@ -65,7 +65,6 @@ public class FileServlet2 extends HttpServlet {
 					 } else {
 						 // 파일 자체가 담기는 것 ==> 그래서 Object로 넘김
 						 param.put(key, fi);
-						 System.out.println("param : " + param);
 //						 String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img\\";
 //						 String fileName = fi.getName();
 //						 File targetFile = new File(path + "\\" + fileName);

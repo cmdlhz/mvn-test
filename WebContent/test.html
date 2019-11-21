@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+//window.onload = function(){
+//	console.log(1);
+//}
+//window.onload = function(){
+//	console.log(2);
+//}
+//변수로 쓰고 있으므로 : '2'만 console.log
+
+var f1 = function(){
+	console.log(1);
+}
+var f2 = function(){
+	console.log(2);
+}
+
+window.addEventListener('load', f1);
+window.addEventListener('load', f2);
+
+</script>
+
+</body>
+</html>
