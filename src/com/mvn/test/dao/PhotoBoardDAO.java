@@ -11,7 +11,7 @@ public interface PhotoBoardDAO {
 	public List<PhotoBoardVO> selectPhotoList(Map<String, String> photo);
 	public PhotoBoardVO selectPhoto(PhotoBoardVO photo);
 	
-	public int insertPhoto(SqlSession ss, Map<String, Object> photo);
+	public int insertPhoto(SqlSession ss, PhotoBoardVO photo);
 	public int updatePhoto(PhotoBoardVO photo);
 	public int deletePhoto(PhotoBoardVO photo);
 }

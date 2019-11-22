@@ -53,7 +53,7 @@
  		modtim = TO_CHAR(SYSDATE, 'HH24MISS'), 
 		modusr = #{modusr}, 
 		pb_cnt = #{pbCnt} + 1, 
-		where pb_num = #{pbNum} 		
+		where pb_num = #{pbNum}
 	</update>
 	<delete id="deletePhoto">
 		delete from photo_board where pb_num = #{pbNum}

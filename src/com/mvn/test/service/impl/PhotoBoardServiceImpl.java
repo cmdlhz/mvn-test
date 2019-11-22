@@ -56,7 +56,7 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 			}
 			System.out.println(pb);
 			
-			int cnt = pbdao.insertPhoto(ss, photo);
+			int cnt = pbdao.insertPhoto(ss, pb);
 			if(cnt == 1) {
 				pbMap.put("msg", "등록 SUCCESSSSSS!");
 				pbMap.put("result", "true");
