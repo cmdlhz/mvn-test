@@ -34,7 +34,10 @@
 	  </tbody>
 	  <tbody>
 	  	<tr>
-	  		<td colspan="12" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/photo/insert')">ADD</button></td>
+	  		<td colspan="12" align="center">
+	  			<button type="button" class="btn btn-outline-primary" onclick="goPage('/photo/insert')">ADD</button>
+	  			<button type="button" class="btn btn-outline-dark" onclick="location.href='http://localhost'">INDEX</button>
+	  		</td>
 	  	</tr>
 	  </tbody>
 	</table>
@@ -58,11 +61,12 @@ window.onload = function(){
 			var html = '';
 			for(var photo of photoList){
 				html += '<tr>';
-				html += '<td>' + photo.pbNum + '</td>';
+// 				html += '<td>' + photo.pbNum + '</td>';
+				html += '<td><button type="button" class="btn btn-outline-info" onclick="goPage(\'/photo/view?pbNum=' + photo.pbNum + '\')">' + photo.pbNum + '</td>';
 				html += '<td onclick="goPage(\'/photo/view?pbNum=' + photo.pbNum + '\')">' + photo.pbTitle + '</td>';
 				html += '<td>' + photo.pbContent + '</td>';
-				html += '<td>' + photo.pbImg1 + '</td>';
-				html += '<td>' + photo.pbImg2 + '</td>';
+				html += '<td><img src="/img/' + photo.pbImg1 + '" width=100></td>';
+				html += '<td><img src="/img/' + photo.pbImg2 + '" width=100></td>';
 				html += '<td>' + photo.credat + '</td>';
 				html += '<td>' + photo.cretim + '</td>';
 				html += '<td>' + photo.creusr + '</td>';

@@ -46,18 +46,6 @@ public class PhotoController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json;charset=utf-8");
-//		
-//		BufferedReader br = request.getReader();
-//		String str = null;
-////		StringBuffer json = new StringBuffer();
-//		String json = "";
-//		while((str=br.readLine()) != null) {
-//			// json.append(str);
-//			json += str;
-//		}
-//		
-//		PhotoBoardVO photo = new PhotoBoardVO();
 		String cmd = request.getRequestURI().substring(7); // /photo/
 		
 		if("insert".contentEquals(cmd)) {	
@@ -67,13 +55,10 @@ public class PhotoController extends HttpServlet {
 			Map<String, String> rMap = pbs.insertPhoto(param);
 			System.out.println("rMap : " + rMap);
 		} else if("update".contentEquals(cmd)) {
-//			photo = gson.fromJson(json, PhotoBoardVO.class);
-//			json = gson.toJson(pbs.updatePhoto(photo));
+
 		} else if("delete".contentEquals(cmd)) {
-//			photo = gson.fromJson(json, PhotoBoardVO.class);
-//			json = gson.toJson(pbs.deletePhoto(photo));
+
 		}
-//		response.getWriter().print(json);
 	}
 	// 넣어주지 않은 것은 null로 들어감
 }

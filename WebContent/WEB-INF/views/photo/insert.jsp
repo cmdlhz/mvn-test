@@ -16,7 +16,8 @@
 		<h3>Img 2 :</h3> <input type="file" id="pbImg2" /><br><br> <!-- array 형태로 저장됨 -->
 <!-- 		<progress id="pro" value="0" max="100"></progress><br><br> -->
 <!-- 		<div id="rDiv"></div> -->
-		<button onclick="upload()">UPLOAD</button>
+		<button type="button" class="btn btn-outline-success"onclick="upload()">UPLOAD</button>
+		<button type="button" class="btn btn-outline-primary" onclick="goPage('/photo/list')">LIST</button>
 	</div>
 </body>
 <script>

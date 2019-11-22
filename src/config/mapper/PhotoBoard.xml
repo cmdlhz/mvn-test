@@ -42,8 +42,7 @@
 <!-- 또 아니면 mybatis-config.xml 에서 -->
 <!-- <setting name="jdbcTypeforNull" value="null" /> -->
 
-		insert into photo_board  
-<!-- 		insert into photo_board(pb_num, pb_title, pb_content, pb_img1, pb_img2,  credat, cretim, creusr, moddat, modtim, modusr, pb_cnt)  -->
+		insert into photo_board(pb_num, pb_title, pb_content, pb_img1, pb_img2,  credat, cretim, creusr, moddat, modtim, modusr, pb_cnt) 
 		values(SEQ_pb_num.nextval, #{pbTitle}, #{pbContent}, #{pbImg1}, #{pbImg2}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, 0)
 	</insert>
 	<update id="updatePhoto">

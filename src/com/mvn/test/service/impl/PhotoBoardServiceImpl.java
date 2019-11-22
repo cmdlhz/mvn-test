@@ -52,6 +52,7 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 			if(photo.get("pbImg2") != null) {
 				FileItem fi = (FileItem)photo.get("pbImg2");
 				String fileName = ServletFileUtil.saveFile(fi);
+				// 앞에 "/img/" 추가?! 난 되는뎅
 				pb.setPbImg2(fileName);
 			}
 			System.out.println(pb);

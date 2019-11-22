@@ -26,7 +26,10 @@
 	  </tbody>
 	  <tbody>
 	  	<tr>
-	  		<td colspan="4" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">Sign Up</button></td>
+	  		<td colspan="4" align="center">
+	  			<button type="button" class="btn btn-outline-primary" onclick="goPage('/user/insert')">Sign Up</button>
+	  			<button type="button" class="btn btn-outline-dark" onclick="location.href='http://localhost'">INDEX</button>
+	  		</td>
 	  	</tr>
 	  </tbody>
 	</table>
