@@ -14,67 +14,61 @@
 		<h3>작성자 :</h3> <input type="number" id="creusr" /><br><br>
 		<h3>Img 1 :</h3> <input type="file" id="pbImg1" /><br><br> <!-- array 형태로 저장됨 -->
 		<h3>Img 2 :</h3> <input type="file" id="pbImg2" /><br><br> <!-- array 형태로 저장됨 -->
-		<progress id="pro" value="0" max="100"></progress><br><br>
-		<div id="rDiv"></div>
+<!-- 		<progress id="pro" value="0" max="100"></progress><br><br> -->
+<!-- 		<div id="rDiv"></div> -->
 		<button onclick="upload()">UPLOAD</button>
 	</div>
 </body>
 <script>
 function upload(){
-	var xhr = new XMLHttpRequest();
-	
-	xhr.upload.addEventListener('progress', function(e){
-// 		console.log("event : " + e);
-		var percentage = (e.loaded/e.total) * 100;
-		pro.value = percentage;
-		rDiv.innerHTML = Math.floor(percentage) + '%';
-	});
-	
-	var pro = document.querySelector('#pro');
-	var formData = new FormData();
-	
-	console.log("creusr : " + document.querySelector('#creusr').value);
-	console.log("pbImg1 (name) : " + document.querySelector('#pbImg1').files[0].name);
-	console.log("pbImg1 (type) : " + document.querySelector('#pbImg1').files[0].type);
-	
-	formData.append('pbTitle', document.querySelector('#pbTitle').value);
-	formData.append('pbContent', document.querySelector('#pbContent').value);
-	formData.append('creusr', document.querySelector('#creusr').value);
-	formData.append('pbImg1', document.querySelector('#pbImg1').files[0]);
-	formData.append('pbImg2', document.querySelector('#pbImg2').files[0]);
-	
-	for (var value of formData.values()) {
-		console.log("formData value : " + value);
+	var formData = makeFormData();
+// 	for(var obj of formData.entries()){
+// 		console.log(obj);
+// 	}
+	var conf = {
+	 	method : 'POST',
+	 	url : '/photo/insert',
+	 	func : function(res){
+	 		res = JSON.parse(res);
+	 		console.log(res);
+	 	},
+	 	data : formData // 없다면 ''라고 하면 됨
 	}
-		
-	xhr.open('POST', '/photo/insert');
-	
-	xhr.onreadystatechange = function(){
-		console.log("xhr.readyState : " + xhr.readyState);
-		console.log("xhr.status : " + xhr.status);
-		
-		console.log("xhr.responseText : " + xhr.responseText);
-		
-		if(xhr.readyState == 4 && xhr.status == 200){
-			var res = JSON.parse(xhr.responseText);
-			console.log("res.msg : " + res.msg);
-			if(res.result == 'true'){
-				goPage('/photo/list');
-			} else {
-				console.log('실패....');
-			}
-		}
-	}	
-	
-	xhr.send(formData);
+	send(conf);
 }
+
+
+//	xhr.upload.addEventListener('progress', function(e){
+//// 		console.log("event : " + e);
+//		var percentage = (e.loaded/e.total) * 100;
+//		pro.value = percentage;
+//		rDiv.innerHTML = Math.floor(percentage) + '%';
+//	});
+//	var pro = document.querySelector('#pro');
+
+//	var formData = new FormData();
+
+//	console.log("creusr : " + document.querySelector('#creusr').value);
+//	console.log("pbImg1 (name) : " + document.querySelector('#pbImg1').files[0].name);
+//	console.log("pbImg1 (type) : " + document.querySelector('#pbImg1').files[0].type);
+
+//	formData.append('pbTitle', document.querySelector('#pbTitle').value);
+//	formData.append('pbContent', document.querySelector('#pbContent').value);
+//	formData.append('creusr', document.querySelector('#creusr').value);
+//	formData.append('pbImg1', document.querySelector('#pbImg1').files[0]);
+//	formData.append('pbImg2', document.querySelector('#pbImg2').files[0]);
+	
+//	xhr.open('POST', '/photo/insert');
+
+
 
 /*
  * 공통 만들기
  */
  
 //function makeFormData(){
-//	var objs = document.querySelectorAll('[id]');
+//	var objs = document.querySelectorAll('input[id], textarea[id]');
+// 	console.log(objs.length);
 //	for(var i=0; i<objs.length; i++){
 //		var obj = objs[i];
 //		if(obj.type == 'file'){
@@ -94,7 +88,6 @@ function upload(){
 // 	xhr.onreadystatechange = function(){
 // 		if(xhr.readyState == 4 && xhr.status == 200){
 // 			xhr.func(xhr.responseText); 
-// 			// .func ????? 머지...
 // 		}
 // 	}
 // 	return xhr;
@@ -114,3 +107,5 @@ function upload(){
 // }
 </script>
 </html>
+
+
