@@ -20,6 +20,26 @@
 		</where>
 	</select>
 	<insert id="insertPhoto" parameterType="com.mvn.test.vo.PhotoBoardVO">
+<!--  선생님은 이 방법으로 null처리 하심 -->
+<!-- 		insert into photo_board(pb_num, pb_title, pb_content,   -->
+<!-- 		<if test="pbImg1 != null"> -->
+<!-- 			pb_img1, -->
+<!-- 		</if> -->
+<!-- 		<if test="pbImg2 != null"> -->
+<!-- 			pb_img2,  -->
+<!-- 		</if>				 -->
+<!-- 		 credat, cretim, creusr, moddat, modtim, modusr,  -->
+<!-- 		<if test="pbCnt != null"> -->
+<!-- 			pb_cnt -->
+<!-- 		</if> -->
+<!-- 		) -->
+<!--  values도 마찬가지 -->
+
+<!-- 아니면 VO에서 String을 ""로 넣어도 됨 -->
+
+<!-- 또 아니면 mybatis-config.xml 에서 -->
+<!-- <setting name="jdbcTypeforNull" value="null" /> -->
+
 		insert into photo_board(pb_num, pb_title, pb_content, pb_img1, pb_img2,  credat, cretim, creusr, moddat, modtim, modusr, pb_cnt) 
 		values(SEQ_pb_num.nextval, #{pbTitle}, #{pbContent}, #{pbImg1}, #{pbImg2}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(SYSDATE, 'HH24MISS'), #{creusr}, 0)
 	</insert>

@@ -68,5 +68,49 @@ function upload(){
 	
 	xhr.send(formData);
 }
+
+/*
+ * 공통 만들기
+ */
+ 
+//function makeFormData(){
+//	var objs = document.querySelectorAll('[id]');
+//	for(var i=0; i<objs.length; i++){
+//		var obj = objs[i];
+//		if(obj.type == 'file'){
+// 			if(obj.files.length != 0){ // 이러면 undefined가 안들어감
+// 				formData.append(obj.id.obj.files[0]); // undefined가 들어가면 에러나서
+// 			}
+//		} else {
+//			formData.append(obj.id.obj.value);
+//		}
+//	}
+//	return formData;
+//}
+
+// function getXhr(conf){
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open(conf.method.conf.url);
+// 	xhr.onreadystatechange = function(){
+// 		if(xhr.readyState == 4 && xhr.status == 200){
+// 			xhr.func(xhr.responseText); 
+// 			// .func ????? 머지...
+// 		}
+// 	}
+// 	return xhr;
+// }
+
+// function submit(){
+// 	var xhr = getXhr({
+// 		method : 'POST',
+// 		url : '/photo/insert',
+// 		func : function(res){
+// 			res = JSON.parse(res);
+// 			alert(res.msg);
+// 		}
+// 	});
+// 	var fd = makeFormData();
+// 	xhr.send(fd);
+// }
 </script>
 </html>

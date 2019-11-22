@@ -27,9 +27,9 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 	}
 
 	@Override
-	public Map<String, String> insertPhoto(SqlSession ss, Map<String, Object> photo) {
+	public Map<String, String> insertPhoto(Map<String, Object> photo) {
 		
-		ss = InitServlet.getSqlSession();
+		SqlSession ss = InitServlet.getSqlSession();
 		
 		try {
 			PhotoBoardVO pb = new PhotoBoardVO();
