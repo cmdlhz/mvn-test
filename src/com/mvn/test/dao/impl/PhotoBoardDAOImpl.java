@@ -14,30 +14,13 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	private SqlSessionFactory ssf;
 
 	@Override
-	public List<PhotoBoardVO> selectPhotoList(Map<String, String> photo) {
-		SqlSession ss = InitServlet.getSqlSession();
-		try {
-			// "selectList" : iBatis method
-			return ss.selectList("PhotoBoard.selectPhotoList");
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			ss.close();
-		}
-		return null;
+	public List<PhotoBoardVO> selectPhotoList(SqlSession ss, Map<String, String> photo) {
+		return ss.selectList("PhotoBoard.selectPhotoList", photo);
 	}
 
 	@Override
-	public PhotoBoardVO selectPhoto(PhotoBoardVO photo) {
-		SqlSession ss = InitServlet.getSqlSession();
-		try {
-			return ss.selectOne("PhotoBoard.selectPhoto", photo);
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			ss.close();
-		}
-		return null;
+	public PhotoBoardVO selectPhoto(SqlSession ss, PhotoBoardVO photo) {
+		return ss.selectOne("PhotoBoard.selectPhoto", photo);
 	}
 
 	@Override
@@ -47,33 +30,13 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	}
 
 	@Override
-	public int updatePhoto(PhotoBoardVO photo) {
-		SqlSession ss = InitServlet.getSqlSession();
-		try {
-			int cnt = ss.update("PhotoBoard.updatePhoto", photo);
-			ss.commit();
-			return cnt;
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			ss.close();
-		}
-		return 0;
+	public int updatePhoto(SqlSession ss, PhotoBoardVO photo) {
+		return ss.update("PhotoBoard.updatePhoto", photo);
 	}
 
 	@Override
-	public int deletePhoto(PhotoBoardVO photo) {
-		SqlSession ss = InitServlet.getSqlSession();
-		try {
-			int cnt = ss.delete("PhotoBoard.deletePhoto", photo);
-			ss.commit();
-			return cnt;
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			ss.close();
-		}
-		return 0;
+	public int deletePhoto(SqlSession ss, PhotoBoardVO photo) {
+		return ss.delete("PhotoBoard.deletePhoto", photo);
 	}
 	
 	public static void main(String[] args) {
@@ -81,8 +44,14 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 		PhotoBoardDAO pbdao = new PhotoBoardDAOImpl();
 		PhotoBoardVO pb = new PhotoBoardVO();
 		pb.setPbTitle("test");
+		pb.setPbContent("test content");
 		pb.setCreusr(1);
-		pb.setPbImg1("1");
-		pb.setPbImg2("2");
+		pbdao.insertPhoto(ss, pb);
+		System.out.println(pbdao.insertPhoto(ss, pb));
+		System.out.println(pbdao.selectPhoto(ss, pb));
+		System.out.println(pbdao.selectPhotoList(ss, null));
+		System.out.println(pbdao.updatePhoto(ss, pb));
+		System.out.println(pbdao.deletePhoto(ss, pb));
+		ss.commit();
 	}
 }

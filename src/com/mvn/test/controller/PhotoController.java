@@ -46,19 +46,23 @@ public class PhotoController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cmd = request.getRequestURI().substring(7); // /photo/
+
+//		String cmd = request.getRequestURI().substring(7); // /photo/
+		String cmd = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/") + 1);
+		String json = "";
+		Map<String, Object> param = ServletFileUtil.parseRequest(request);
+//		JsonElement je = gson.toJsonTree(photo);
+//		PhotoBoardVO pb = gson.fromJson(je, PhotoBoardVO.class);
+		PhotoBoardVO pb = new PhotoBoardVO();
 		
 		if("insert".contentEquals(cmd)) {	
-			Map<String, Object> param = ServletFileUtil.parseRequest(request); // 이렇게 만들고 꼭 테스트 하기!
-			System.out.println("param : " + param);
-			
-			Map<String, String> rMap = pbs.insertPhoto(param);
-			System.out.println("rMap : " + rMap);
+			json = gson.toJson(pbs.insertPhoto(param));
 		} else if("update".contentEquals(cmd)) {
-
+			json = gson.toJson(pbs.updatePhoto(pb));
 		} else if("delete".contentEquals(cmd)) {
-
+			json = gson.toJson(pbs.deletePhoto(pb));
 		}
+		response.getWriter().print(json);
 	}
 	// 넣어주지 않은 것은 null로 들어감
 }

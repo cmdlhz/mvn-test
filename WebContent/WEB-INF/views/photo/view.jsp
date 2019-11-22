@@ -14,27 +14,27 @@
 		<thead class="thead-dark">
 			<tr>
 				<th style="width:10%">#</th>
-				<td data-id="pbNum">#</td>
+				<td data-id="pbNum"></td>
 			</tr>
 			<tr>
 		      	<th style="width:10%">Title</th>
-		      	<td data-id="pbTitle">Title</td>
+		      	<td data-id="pbTitle"></td>
 			</tr>
 			<tr>
 				<th style="width:10%">Content</th>
-				<td data-id="pbContent">Content</td>
+				<td data-id="pbContent"></td>
 			</tr>
 			<tr>
 				<th style="width:10%">Img 1</th>
-				<td data-id="pbImg1">Img 1</td>
+				<td data-id="pbImg1"></td>
 			</tr>
 			<tr>
 				<th style="width:10%">Img 2</th>
-				<td data-id="pbImg2">Img 2</td>
+				<td data-id="pbImg2"></td>
 			</tr>
 			<tr>
 				<th style="width:10%">Views</th>
-				<td data-id="pbCnt">Views</td>
+				<td data-id="pbCnt"></td>
 			</tr>
 		</thead>
 		<tbody>

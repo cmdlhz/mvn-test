@@ -18,14 +18,38 @@ import com.mvn.test.vo.PhotoBoardVO;
 public class PhotoBoardServiceImpl implements PhotoBoardService {
 	private PhotoBoardDAO pbdao = new PhotoBoardDAOImpl();
 
+//	public static void main(String[] args) {
+//	
+//}
+	
 	@Override
 	public List<PhotoBoardVO> getPhotoList(Map<String, String> photo) {
-		return pbdao.selectPhotoList(photo);
+		SqlSession ss = InitServlet.getSqlSession();
+		try {
+			return pbdao.selectPhotoList(ss, photo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return null;
 	}
 
 	@Override
 	public PhotoBoardVO getPhoto(PhotoBoardVO photo) {
-		return pbdao.selectPhoto(photo);
+		SqlSession ss = InitServlet.getSqlSession();
+		try {
+			PhotoBoardVO pb = new PhotoBoardVO();
+			pb.setPbNum(22); //??? 받아와야 함
+			pb.setPbCnt(1); // ??? 받아와야 함
+			updatePhoto(pb); // count update
+			return pbdao.selectPhoto(ss, photo); // int로 바꿔도 됨. 하나만 받으므로
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return null;
 	}
 
 	@Override
@@ -52,7 +76,7 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 			if(photo.get("pbImg2") != null) {
 				FileItem fi = (FileItem)photo.get("pbImg2");
 				String fileName = ServletFileUtil.saveFile(fi);
-				// 앞에 "/img/" 추가?! 난 되는뎅
+				// 앞에 "/img/" 추가?! 난 되는뎅;
 				pb.setPbImg2(fileName);
 			}
 			System.out.println(pb);
@@ -75,8 +99,9 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 
 	@Override
 	public Map<String, String> updatePhoto(PhotoBoardVO photo) {
+		SqlSession ss = InitServlet.getSqlSession();
 		Map<String, String> pbMap = new HashMap<String, String>();
-		int result= pbdao.updatePhoto(photo);
+		int result= pbdao.updatePhoto(ss, photo);
 		if(result == 1) {
 			pbMap.put("msg", "수정 SUCCESSSSSS!");
 			pbMap.put("result", "true");
@@ -89,8 +114,9 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 
 	@Override
 	public Map<String, String> deletePhoto(PhotoBoardVO photo) {
+		SqlSession ss = InitServlet.getSqlSession();
 		Map<String, String> pbMap = new HashMap<String, String>();
-		int result= pbdao.deletePhoto(photo);
+		int result= pbdao.deletePhoto(ss, photo);
 		if(result == 1) {
 			pbMap.put("msg", "삭제 SUCCESSSSSS!");
 			pbMap.put("result", "true");

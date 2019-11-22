@@ -10,16 +10,18 @@
 
 	<select id="selectPhotoList" resultType = "com.mvn.test.vo.PhotoBoardVO">
 <!-- 		select pb_num "pbNum", pb_title "pbTitle", pb_content "pbContent", pb_img1 "pbImg1", pb_img2 "pbImg2", credat, cretim, creusr, moddat, modtim, modusr, pb_cnt "pbCnt" from photo_board -->
-		select pb_num, pb_title, pb_content, pb_img1, pb_img2, credat, cretim, creusr, moddat, modtim, modusr, pb_cnt from photo_board
+		select pb_num, pb_title, pb_content, pb_img1, pb_img2, credat, cretim, creusr, moddat, modtim, modusr, pb_cnt from photo_board 
+		order by pb_num desc
 	</select>
 	<select id="selectPhoto" resultType = "com.mvn.test.vo.PhotoBoardVO">
 <!-- 		select pb_num "pbNum", pb_title "pbTitle", pb_content "pbContent", pb_img1 "pbImg1", pb_img2 "pbImg2", credat, cretim, creusr, moddat, modtim, modusr, pb_cnt "pbCnt" from photo_board -->
-		select pb_num, pb_title, pb_content, pb_img1, pb_img2, credat, cretim, creusr, moddat, modtim, modusr, pb_cnt from photo_board
-		<where>
-			<if test="pbNum != null">
-				pb_num = #{pbNum}
-			</if>
-		</where>
+		select pb_num, pb_title, pb_content, pb_img1, pb_img2, credat, cretim, creusr, moddat, modtim, modusr, pb_cnt from photo_board 
+		where pb_num = #{pbNum}
+<!-- 		<where> -->
+<!-- 			<if test="pbNum != null"> -->
+<!-- 				pb_num = #{pbNum} -->
+<!-- 			</if> -->
+<!-- 		</where> -->
 	</select>
 	<insert id="insertPhoto" parameterType="com.mvn.test.vo.PhotoBoardVO">
 <!--  선생님은 이 방법으로 null처리 하심 -->
@@ -47,11 +49,19 @@
 	</insert>
 	<update id="updatePhoto">
 		update photo_board 
-		set pb_title = #{pbTitle}, 
- 		moddat = TO_CHAR(SYSDATE, 'YYYYMMDD'), 
- 		modtim = TO_CHAR(SYSDATE, 'HH24MISS'), 
-		modusr = #{modusr}, 
-		pb_cnt = #{pbCnt} + 1, 
+		<set>
+		 	moddat = TO_CHAR(SYSDATE, 'YYYYMMDD'), 
+ 			modtim = TO_CHAR(SYSDATE, 'HH24MISS'), 
+			<if test="pbTitle != null">
+				pb_title = #{pbTitle}, 
+			</if>
+			<if test="pbContent != null">
+				pb_title = #{pbTitle}, 
+			</if>
+			<if test="pbCnt != null">
+				pb_cnt = pb_cnt + 1, 
+			</if>
+		</set>		
 		where pb_num = #{pbNum}
 	</update>
 	<delete id="deletePhoto">

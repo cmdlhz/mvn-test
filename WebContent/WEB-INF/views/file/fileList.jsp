@@ -27,7 +27,10 @@
 	  </tbody>
 	  <tbody>
 	  	<tr>
-	  		<td colspan="4" align="center"><button type="button" class="btn btn-outline-primary" onclick="goPage('/file/insert')">ADD</button></td>
+	  		<td colspan="4" align="center">
+	  			<button type="button" class="btn btn-outline-primary" onclick="goPage('/file/insert')">ADD</button>
+	    		<button type="button" class="btn btn-outline-dark" onclick="location.href='http://localhost'">INDEX</button>
+	  		</td>
 	  	</tr>
 	  </tbody>
 	</table>
