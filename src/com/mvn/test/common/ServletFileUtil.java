@@ -13,6 +13,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class ServletFileUtil {
+	private static final String path= "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img\\";
 	private static final int memSize = 1024 * 1024 * 5;
 	private static final int totalSize = 1024 * 1024 * 400;
 	private static final int fileSize = 1024 * 1024 * 400;
@@ -56,5 +57,12 @@ public class ServletFileUtil {
 		}
 		
 		return param;
+	}
+	public static String saveFile(FileItem fi) throws Exception {
+		String fileName = fi.getName();
+		fileName = System.nanoTime() + fileName.substring(fileName.lastIndexOf("."));
+		File f = new File(path + fileName);
+		fi.write(f);
+		return fileName;
 	}
 }

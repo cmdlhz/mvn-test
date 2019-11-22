@@ -1,5 +1,6 @@
 package com.mvn.test.service.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.ibatis.session.SqlSession;
 
+import com.mvn.test.common.ServletFileUtil;
 import com.mvn.test.controller.InitServlet;
 import com.mvn.test.dao.PhotoBoardDAO;
 import com.mvn.test.dao.impl.PhotoBoardDAOImpl;
@@ -28,43 +30,46 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 
 	@Override
 	public Map<String, String> insertPhoto(Map<String, Object> photo) {
+	
+		PhotoBoardVO pb = new PhotoBoardVO();
+		pb.setPbTitle((String)photo.get("pbTitle"));
+		pb.setPbContent((String)photo.get("pbContent"));
+		pb.setCreusr(Integer.parseInt((String)photo.get("creusr")));
+		String path = "C:\\Users\\Administrator\\eclipse-workspace\\mvn-test\\WebContent\\img";
 		
+		// DAO로 넘어가기
+		Map<String, String> pbMap = new HashMap<>();
+		pbMap.put("msg", "등록 FAILURE!!!!!");
+		pbMap.put("result", "false");
 		SqlSession ss = InitServlet.getSqlSession();
 		
 		try {
-			PhotoBoardVO pb = new PhotoBoardVO();
-			
-			pb.setPbTitle((String)photo.get("pbTitle"));
-			pb.setPbContent((String)photo.get("pbContent"));
-			pb.setCreusr(Integer.parseInt((String)photo.get("creusr")));
 			if(photo.get("pbImg1") != null) {
 				FileItem fi = (FileItem)photo.get("pbImg1");
-				pb.setPbImg1(fi.getName());
+				String fileName = ServletFileUtil.saveFile(fi);
+				pb.setPbImg1(fileName);
 			}
 			if(photo.get("pbImg2") != null) {
 				FileItem fi = (FileItem)photo.get("pbImg2");
-				pb.setPbImg2(fi.getName());
+				String fileName = ServletFileUtil.saveFile(fi);
+				pb.setPbImg2(fileName);
 			}
+			System.out.println(pb);
 			
-			// DAO로 넘어가기
-			int result= pbdao.insertPhoto(ss, photo);
-			Map<String, String> pbMap = new HashMap<String, String>();
-			if(result == 1) {
+			int cnt = pbdao.insertPhoto(ss, photo);
+			if(cnt == 1) {
 				pbMap.put("msg", "등록 SUCCESSSSSS!");
 				pbMap.put("result", "true");
-			} else {
-				pbMap.put("msg", "등록 FAILURE!!!!!");
-				pbMap.put("result", "false");
 			}
 			ss.commit();
-			return pbMap;
 		} catch(Exception e) {
 			ss.rollback();
+			// file delete가 있어야 함. 혹시나 저장이 되었을 수도 있어서 
 			e.printStackTrace();
 		} finally {
 			ss.close();
 		}
-		return null;
+		return pbMap;
 	}
 
 	@Override
@@ -95,4 +100,13 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		return pbMap;
 	}
 
+	public static void main(String[] args) {
+		String fileName = "img.jpg";
+		int index = fileName.lastIndexOf(".");
+		System.out.println(index); // 3
+		fileName = fileName.substring(index);
+		System.out.println(fileName); // .jpg
+		fileName = System.nanoTime() + fileName;
+		System.out.println(fileName); // 13268832707810.jpg
+	}
 }

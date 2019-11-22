@@ -47,7 +47,7 @@ public class EncodingFilter implements Filter {
 		
 		
 		// 결과값은 따로 찍어줘야 함
-		HttpServletResponse res = (HttpServletResponse)response;
+//		HttpServletResponse res = (HttpServletResponse)response;  // 이게 에러를 일으켰음
 		// 항상 "json"이 좋은 것은 아님. html이 필요할 수도
 //		res.setContentType("application/json;charset=" + this.charSet);
 		chain.doFilter(request, response);
@@ -55,9 +55,9 @@ public class EncodingFilter implements Filter {
 
 	// 메모리가 생긴 후 실행되기 때문에, 서버가 켜져있으면 무조건 실행됨
 	public void init(FilterConfig fConfig) throws ServletException {
-		String className = "com.mvn.test.filter.EncodingFilter";
+//		String className = "com.mvn.test.filter.EncodingFilter";  // 이게 에러를 일으켰음
 		// web-xml 에서 
-		String charSet = fConfig.getInitParameter("charSet");
+		String charSet = fConfig.getInitParameter("charSet"); 
 		if(charSet != null) {
 			this.charSet = charSet;
 		}

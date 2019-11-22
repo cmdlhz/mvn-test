@@ -21,7 +21,7 @@
 </body>
 <script>
 function upload(){
-	var formData = makeFormData();
+	var formData = makeFormData(); // *****
 // 	for(var obj of formData.entries()){
 // 		console.log(obj);
 // 	}
@@ -29,12 +29,12 @@ function upload(){
 	 	method : 'POST',
 	 	url : '/photo/insert',
 	 	func : function(res){
-	 		res = JSON.parse(res);
+// 	 		res = JSON.parse(res);
 	 		console.log(res);
 	 	},
 	 	data : formData // 없다면 ''라고 하면 됨
 	}
-	send(conf);
+	send(conf); // *****
 }
 
 
