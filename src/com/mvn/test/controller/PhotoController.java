@@ -55,6 +55,13 @@ public class PhotoController extends HttpServlet {
 //		PhotoBoardVO pb = gson.fromJson(je, PhotoBoardVO.class);
 		PhotoBoardVO pb = new PhotoBoardVO();
 		
+		/*
+		 * Reflection을 사용하면 공통 작업이 자동으로 처리됨
+		 * 전제조건 : 화면에서 보내는 key-value가 VO에 정의된 것과 반드시 모두 일치해야 한다!
+		 */
+		// PhotoBoardVO pb;
+		// try안에 (PhotoBoardVO)ServletFileUtil.parseRequest(request, PhotoBoardVO.class);
+		
 		if("insert".contentEquals(cmd)) {	
 			json = gson.toJson(pbs.insertPhoto(param));
 		} else if("update".contentEquals(cmd)) {
