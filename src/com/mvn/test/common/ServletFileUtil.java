@@ -61,6 +61,7 @@ public class ServletFileUtil {
 	public static String saveFile(FileItem fi) throws Exception {
 		String fileName = fi.getName();
 		fileName = System.nanoTime() + fileName.substring(fileName.lastIndexOf("."));
+		// . 앞에 파일명을 nanoTime을 바꾸기 위해
 		File f = new File(path + fileName);
 		fi.write(f);
 		return fileName;
